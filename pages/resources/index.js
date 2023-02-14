@@ -33,7 +33,6 @@ function index() {
     getallCtegory();
   }, [])
 
-  //const Editor = dynamic(() => import("../../components/Editor"), { ssr: false });
   const handleSubClose = () => setsubcategoryShow(false);
   const handleSubShow = (item) => {
     setsubcategoryShow(true);
@@ -246,14 +245,14 @@ function index() {
             </Card.Header>
             <Card.Body>
               <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
+                <table className="table table-bordered table-hover">
+                  <thead  className="resourceTbl">
+                    <tr >
                       <th scope="col">Id</th>
                       <th scope="col">Category</th>
                       <th scope="col">Description</th>
                       <th scope="col">Action</th>
-
+                      <th scope="col" className='text-center'>Sub Categories</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -261,37 +260,39 @@ function index() {
                       categoryList?.map((item, idx) => (
                         <>
                           <tr key={idx}>
-                            <th scope="row">{idx + 1}</th>
+                            <th scope="row"><strong>{idx + 1}</strong></th>
                             <td>{item.name}</td>
                             <td>{item.description}</td>
                             <td>
-                              <button class="btn btn-primary" onClick={e => editCategory(item)} value={item.id}>Edit</button>
+                              <button class="btn btn-info" title='Edit Category' style={{padding: "1px 4px 1px 4px"}} onClick={e => editCategory(item)} value={item.id}><i class="material-symbols-outlined mt-2" >edit</i></button>
                               &nbsp;
-                              {item?.subCategories.length == 0 ? (<button class="btn btn-dark" onClick={() => DeleteResourceById(item._id)} value={item._id}>Delete</button>) : null}
-
-                              <button class="btn btn-info" onClick={e => handleSubShow(item)} >Add Sub Category
+                              {item?.subCategories.length == 0 ? (<button class="btn btn-primary" style={{padding: "1px 4px 1px 4px"}}  title='Delete Category' onClick={() => DeleteResourceById(item._id)} value={item._id}><i class="material-symbols-outlined mt-2">delete</i></button>) : null}
+&nbsp;
+                              <button class="btn btn-warning" title='Add Sub Category' style={{padding: "1px 4px 1px 4px"}} onClick={e => handleSubShow(item)} ><i class="material-symbols-outlined mt-2">add</i>
                               </button></td>
 
                             <td>
-                              {item?.subCategories.length > 0 ? (<table className="table">
-                                <thead>
+                              {item?.subCategories.length > 0 ? (<table className="table table-bordered table-hover">
+                                <thead className="resourceTbl">
+                                  <tr>
                                   <th scope="col">Id</th>
                                   <th scope="col">Category</th>
                                   <th scope="col">Description</th>
                                   <th scope="col">Content</th>
                                   <th scope="col">Action</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
                                   {item?.subCategories?.map((subCat, subidx) =>
-                                    <tr key={subidx} style={{ backgroundColor: "#e0c4c4" }} >
+                                    <tr key={subidx} style={{ backgroundColor: "rgb(238 249 255)" }} >
                                       <th scope="row">#</th>
                                       <td style={{ color: "#555770" }} >{subCat.name}</td>
                                       <td style={{ color: "#555770" }} >{subCat.description}</td>
-                                      <td style={{ color: "#555770" }} ><div dangerouslySetInnerHTML={{ __html: subCat.content }}></div></td>
-                                      <td>
-                                        <button class="btn btn-primary" onClick={e => editsubCategory(subCat, item.name)} value={idx + 2}>Edit</button>
+                                      <td style={{ color: "#555770" }} className="text-truncate" ><div dangerouslySetInnerHTML={{ __html: subCat.content }}></div></td>
+                                      <td className='resourceBtnTd'>
+                                        <button class="btn btn-success resourceIcn"  title='Edit Sub Category'  style={{padding: "1px 4px 1px 4px"}} onClick={e => editsubCategory(subCat, item.name)} value={idx + 2}><i class="material-symbols-outlined mt-2">edit</i></button>
                                         &nbsp;
-                                        <button class="btn btn-dark" onClick={() => DeleteResourceById(subCat._id)} value={subCat._id}>Delete</button>
+                                        <button class="btn btn-danger resourceIcn"  title='Delete Sub Category'  style={{padding: "1px 4px 1px 4px"}} onClick={() => DeleteResourceById(subCat._id)} value={subCat._id}><i class="material-symbols-outlined mt-2">delete</i></button>
                                       </td>
                                     </tr>
                                   )}

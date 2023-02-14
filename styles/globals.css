@@ -39,3 +39,16 @@ body {
    background-color:#dd300e;
    color:#fff;
 }
+.resourceTbl>tr>th{
+   border: 1px solid #e6dede;
+   font-weight: 700;
+   background: #fceae6;
+}
+
+.resourceIcn{
+   padding: 5px 4px 0px 5px;
+}
+
+.resourceBtnTd{
+   display: flex;
+}
