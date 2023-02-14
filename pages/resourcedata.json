@@ -1,0 +1,18 @@
+{
+    "Category": [
+      {
+        "id": 1,
+        "name": "Sports",
+        "description": "Test sports",
+        "parentId": 0,
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "name": "Health",
+        "description": "Test health",
+        "parentId": 0,
+        "isActive": true
+      }
+    ]
+  }
