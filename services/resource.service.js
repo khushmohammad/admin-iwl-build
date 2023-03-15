@@ -1,72 +1,91 @@
 import axios from "axios";
-export const getToken = async () => {
-    
-    const token = await axios.get("/api/handler");
-    return token.data.token;
-  };
 
-  export const getAllCategoryData = async () => {
-    const token = await getToken();
-    // console.log("new token: ", token);
-  
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/getResouce`,
+export const getToken = async () => {
+  const token = await axios.get("/api/handler");
+  return token.data.token;
+};
+
+export const getAllCategoryData = async () => {
+  const token = await getToken();
+
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/getResouce`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data.body;
+};
+
+export const createResource = async (payload) => {
+  const token = await getToken();
+
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/create`,
+      payload,
       {
         headers: {
-          authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
-    return data.body;
-  };
+    console.log(response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  export const createResource = async (payload) => {
-    
-    const token = await getToken();
+export const getResourceById = async (id) => {
+  const token = await getToken();
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/getResouce/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response?.data?.body;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/create`,
-        payload,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-      return response;
-   
-  };
+export const updateResource = async (id, postData) => {
+  const token = await getToken();
+  try {
+    const response = await axios.patch(
+      `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/updateResouce/${id}`,
+      postData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  export const updateResource = async (postData, id) => {
-    
-    const token = await getToken();
-    const response = await axios
-      .post(
-        `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/updateResouce/${id}`,
-        postData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      console.log(response);
-      return response;
-  };
-
-  export const deleteResourceById = async (id) => {
-    
-    const token = await getToken();
-  
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/deleteResouce/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      return response;
-    
-  };
+export const deleteResourceById = async (id) => {
+  const token = await getToken();
+  try {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_PATH}/admins/resource/deleteResouce/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

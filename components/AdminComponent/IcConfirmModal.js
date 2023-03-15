@@ -11,13 +11,17 @@ const IcConfirmModal = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { _id, firstName, lastName,userId } = props?.apidata;
+  const { _id, firstName, lastName } = props?.apidata;
+
+  console.log(props);
   const statusUpdate = (event, status, id) => {
     event.preventDefault();
+
     const payload = {
+      action: status,
       userId: id,
     };
-
+    console.log(payload, "payload");
     icStatusUpdate(payload, status).then((res) => {
       console.log(res);
       if (res.status === 200) {
@@ -44,13 +48,13 @@ const IcConfirmModal = (props) => {
       <Modal.Footer>
         <Button
           variant="secondary"
-          onClick={(e) => statusUpdate(e, "Approve", userId)}
+          onClick={(e) => statusUpdate(e, "Approve", _id)}
         >
           Approve
         </Button>
         <Button
           variant="primary"
-          onClick={(e) => statusUpdate(e, "Decline", userId)}
+          onClick={(e) => statusUpdate(e, "Decline", _id)}
         >
           Decline
         </Button>

@@ -23,7 +23,6 @@ function index() {
   const dispatch = useDispatch();
   const members = useSelector((state) => state?.member?.members);
 
-
   useEffect(() => {
     member(pageStatus, pageNumber, search);
   }, [pageNumber, pageStatus, search]);
@@ -166,7 +165,8 @@ function index() {
                 </tr>
               </thead>
               <tbody>
-                {members && members?.docs &&
+                {members &&
+                  members?.docs &&
                   members?.docs?.length !== 0 &&
                   members?.docs?.map((item, idx) => {
                     return (
@@ -220,7 +220,6 @@ function index() {
                       </tr>
                     );
                   })}
-                 
               </tbody>
             </table>
             {members && members?.docs && members?.docs.length === 0 && (

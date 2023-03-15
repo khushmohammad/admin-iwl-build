@@ -2,8 +2,10 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import settingReducer from "./setting/reducers";
 import profileReducer from "./profile";
-import memberReducer from './member'
-import icReducer from './ic'
+import memberReducer from "./member";
+import helpReducer from "./help";
+import icReducer from "./ic";
+import resourceReducer from "./resource";
 import { persistStore } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
@@ -19,9 +21,11 @@ const persistConfig = {
 
 const reducers = combineReducers({
   setting: settingReducer,
-  user: profileReducer, 
+  user: profileReducer,
   member: memberReducer,
-  icAction: icReducer
+  icAction: icReducer,
+  help: helpReducer,
+  resource: resourceReducer,
 });
 
 const rootReducer = (state, action) => {

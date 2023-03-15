@@ -24,4 +24,5 @@ export const getAllIc = createAsyncThunk("ic/allIc", async({type,pageNumber,sear
 
 
 
+
 export default ICSlice.reducer;

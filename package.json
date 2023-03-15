@@ -32,6 +32,7 @@
     "react-dropzone": "^14.2.3",
     "react-easy-crop": "^4.6.3",
     "react-filebase64": "^1.0.2",
+    "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.41.1",
     "react-js-pagination": "^3.0.3",
     "react-redux": "^8.0.5",

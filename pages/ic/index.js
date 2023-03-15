@@ -22,15 +22,13 @@ function index() {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageStatus, setPageStatus] = useState("All");
   const [search, setSearch] = useState("");
-
+   const [toggle,setToggle] =  useState(true)
   const dispatch = useDispatch();
   const Icdata = useSelector((state) => state?.icAction?.Ic);
 
   useEffect(() => {
-    
     icmember(pageStatus, pageNumber, search);
   }, [pageNumber, pageStatus, search]);
-
 
   const icmember = (type, pageNumber, search) => {
     setPageStatus(type);
@@ -49,10 +47,13 @@ function index() {
           {/* <Link href="/members/member-list" > */}
 
           <Col md="4" as="li">
-            <Link href="ic" onClick={(e) => {
+            <Link
+              href="ic"
+              onClick={(e) => {
                 setPageStatus("All");
                 setPageNumber(1);
-              }}>
+              }}
+            >
               <Card>
                 <Card.Body>
                   <div className="text-center">
@@ -66,11 +67,14 @@ function index() {
             </Link>
           </Col>
           <Col md="4" as="li">
-            <Link href="ic" onClick={(e) => {
+            <Link
+              href="ic"
+              onClick={(e) => {
                 setPageStatus("Pending");
                 setPageNumber(1);
                 // member("Pending", 1, "");
-              }}>
+              }}
+            >
               <Card>
                 <Card.Body>
                   <div className="text-center">
@@ -84,11 +88,14 @@ function index() {
             </Link>
           </Col>
           <Col md="4" as="li">
-            <Link href="ic" onClick={(e) => {
+            <Link
+              href="ic"
+              onClick={(e) => {
                 setPageStatus("Approved");
                 setPageNumber(1);
                 // member("Approved", 1, "");
-              }}>
+              }}
+            >
               <Card>
                 <Card.Body>
                   <div className="text-center">
@@ -102,11 +109,14 @@ function index() {
             </Link>
           </Col>
           <Col md="4" as="li">
-            <Link href="ic" onClick={(e) => {
+            <Link
+              href="ic"
+              onClick={(e) => {
                 setPageStatus("Decline");
                 setPageNumber(1);
                 // member("Decline", 1, "");
-              }}>
+              }}
+            >
               <Card>
                 <Card.Body>
                   <div className="text-center">
@@ -152,9 +162,11 @@ function index() {
                 </tr>
               </thead>
               <tbody>
-                {Icdata && Icdata?.docs &&
-                Icdata?.docs.length !== 0 &&
+                {Icdata &&
+                  Icdata?.docs &&
+                  Icdata?.docs.length !== 0 &&
                   Icdata?.docs?.map((item, idx) => {
+                    console.log(item.isIcApproved,"<<item>>")
                     return (
                       <tr key={idx}>
                         <th scope="row">{idx + 1}</th>
@@ -177,7 +189,7 @@ function index() {
                           </button>
                         </td>
                         <td className="text-center">
-                          {!item.adminRejected && item.isApprovedByAdmin ? (
+                          {item.isIcApproved  ? (
                             <button
                               className="btn btn-success"
                               onClick={() => {
@@ -209,7 +221,7 @@ function index() {
             {Icdata && Icdata?.docs && Icdata?.docs.length === 0 && (
               <div className="text-center w-100"> "No Record Found!"</div>
             )}
-            
+
             {userData && (
               <>
                 <ModalForICEdit
@@ -227,7 +239,7 @@ function index() {
             )}
 
             <div className="d-flex justify-content-center mt-5">
-              {Icdata && Icdata?.totalDocs !== 0 &&(
+              {Icdata && Icdata?.totalDocs !== 0 && (
                 <Pagination
                   activePage={currentpage}
                   itemClass="page-item"
