@@ -35,4 +35,3 @@ export const getCountryData = async (id) => {
   );
   return res.data.body;
 };
-

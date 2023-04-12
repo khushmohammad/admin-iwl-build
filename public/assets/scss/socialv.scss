@@ -101,7 +101,49 @@
   padding: 0.5rem 0.75rem;
   height: auto;
 }
+.edit-profile .form-floating > label {
+  left: auto;
+}
+// .edit-profile .form-floating > .form-control:focus ~ label,
+// .edit-profile .form-floating > .form-control:not(:placeholder-shown) ~ label,
+// .edit-profile .form-floating > .form-select ~ label {
+//   transform: scale(0.85) translateY(-1.2rem) translateX(1.5rem);
+// }
+.edit-profile
+  .form-floating.date-input
+  .form-control:focus
+  ~ label
+  .edit-profile
+  .form-floating.date-input
+  .form-control:not(:placeholder-shown)
+  ~ label
+  .edit-profile
+  .form-floating.date-input
+  .form-select
+  ~ label,
+.edit-profile .form-floating.date-input > label {
+  top: -12px;
+  z-index: 11;
+  background: white;
+  height: auto;
+  display: inline-block;
+  padding: 0px 4px;
+  left: 15px;
+  width: auto;
+}
 
+.edit-profile .form-floating.date-input .form-control {
+  height: calc(3.2rem + 2px);
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.edit-profile .css-13cymwt-control,
+.edit-profile .css-t3ipsp-control {
+  height: calc(3.2rem + 2px);
+}
+.edit-profile textarea.form-control {
+  height: auto;
+}
 .form-floating > .form-control,
 .form-floating > .form-control-plaintext,
 .form-floating > .form-select {
@@ -147,3 +189,269 @@
     height: auto;
   }
 }
+
+.iq-top-navbar .modal.search-modal {
+  z-index: 111;
+  top: 110%;
+  display: block;
+}
+
+body {
+  background-color: rgba(var(--bs-primary-rgb), 0.02);
+}
+
+.profile-drop-down {
+  border-radius: 100%;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  position: absolute;
+  right: 5px;
+  bottom: 15px;
+}
+
+.iq-profile-avatar:before {
+  top: -0.188rem;
+}
+
+.event-tabs {
+  border-left: 1px solid var(--bs-gray-tint-80);
+}
+.event-dropdwon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+.dropdown-toggle-main a {
+  display: flex;
+}
+.event-host {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 200px;
+  border: 1px solid #f1f1f1;
+}
+.event-detail-dot {
+  width: 5px;
+  height: 5px;
+  background: rgb(85, 87, 112);
+  border-radius: 100%;
+  display: inline-block;
+  margin: 0px 10px;
+}
+.object-fit-cover {
+  object-fit: cover;
+}
+.floatingButtonWrap {
+  position: fixed;
+  z-index: 1111;
+  bottom: 0px;
+  right: 24px;
+  display: flex;
+  align-items: flex-end;
+}
+.floatingButton {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  box-shadow: rgb(0 0 0 / 15%) 0px 0.5rem 1rem;
+  margin-bottom: 24px;
+}
+.floatingButton i {
+  color: #000000;
+}
+
+.floatingButtonWrap .chat-new-floating {
+  max-width: 330px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 0.5rem 1rem;
+  background: white;
+  margin-right: 24px;
+}
+.floatingButtonWrap .chat-content {
+  max-height: 265px;
+  padding: 12px;
+}
+.floatingButtonWrap .chat-header-icons > a {
+  width: auto;
+  height: auto;
+}
+.floatingButtonWrap .chat-head h5 {
+  font-size: 15px;
+  line-height: 15px;
+}
+.floatingButtonWrap .chat-head span {
+  font-size: 11px;
+}
+.floatingButtonWrap .chat-header {
+  display: flex;
+  flex-direction: column;
+}
+.floatingButtonWrap .chat-head {
+  box-shadow: rgb(0 0 0 / 15%) 0px -5px 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.floatingButtonWrap .chat-head header {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.floatingButtonWrap .chat-message {
+  padding: 6px 12px;
+  margin: 0 0.3rem 0.5rem 48px;
+}
+.floatingButtonWrap .chat-content .chat-left .chat-message {
+  margin: 0 0.3rem 0.5rem 12px;
+  background-color: #e6e6e6;
+}
+.floatingButtonWrap .chat:last-child .chat-content .chat-left .chat-message,
+.floatingButtonWrap .chat:last-child .chat-message {
+  margin-bottom: 0px;
+}
+.floatingButtonWrap .chat-message > p {
+  line-height: 1.5;
+}
+.floatingButtonWrap .form-control {
+  border-radius: 20px;
+}
+.emoji-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.background-header {
+  text-align: center;
+}
+.background-header img {
+  color: transparent;
+  height: 400px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.event-date-container {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  z-index: 11;
+  transform: translateX(-50%);
+}
+.event-date {
+  display: inline-block;
+  background: white;
+  padding: 22px 22px 12px;
+  border-radius: 10px;
+  font-size: 34px;
+  font-weight: bold;
+  box-shadow: rgb(0 0 0 / 15%) 0px 0.5rem 1rem;
+}
+.event-date::after {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 100%;
+  background: var(--bs-primary);
+  left: 0px;
+  top: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.event-detail-banner .background-header img {
+  max-width: 900px;
+}
+
+@media (max-width: 991px) {
+  .event-date {
+    padding: 22px 32px 12px;
+  }
+}
+@media (max-width: 767px) {
+  .event-tabs {
+    border-left: none;
+  }
+}
+
+// Dark mode/light mode button
+
+body.dark {
+  background-color: #292c35;
+} /* #9b59b6 */
+
+body.dark h1,
+body.dark .support a {
+  color: #fff;
+}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 52px;
+  height: 28px;
+  border: 1px solid;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-moon {
+  color: #f1c40f;
+  font-size: 22px;
+}
+
+.icon-sun {
+  font-size: 20px;
+  color: #f39c12;
+}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+
+.request-badge {
+  background-color: #2f65b9;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 11px;
+  border-radius: 50%;
+}
+
+// /*  Support me if you like it */
+// .support {
+// 	position: absolute;
+// 	right: 20px;
+// 	bottom: 20px;
+// }
+
+// .support a {
+//   color: #292c35;
+//   font-size: 32px;
+//   backface-visibility: hidden;
+//   display: inline-block;
+//   transition: transform 0.2s ease;
+// }
+
+// .support a:hover{
+//   transform: scale(1.1);
+// }

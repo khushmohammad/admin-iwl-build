@@ -17,6 +17,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { getResourceCategory } from "../../store/resource";
+import { getResourceById } from "../../services/resource.service";
 import AddCategory from "../../components/modals/resource/AddCategory";
 
 function ResourcePage() {
@@ -25,6 +26,7 @@ function ResourcePage() {
   const [expandedRows, setExpandedRows] = useState([]);
   const [parentId, setParentId] = useState(null);
   const [parentName, setParentName] = useState(null);
+  const [subCategory, setSubCategory] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -39,11 +41,13 @@ function ResourcePage() {
     dispatch(getResourceCategory());
   }, []);
 
-  const toggleRow = async (index, parentId) => {
+  const toggleRow = async (id, index) => {
     if (expandedRows.includes(index)) {
       setExpandedRows(expandedRows.filter((i) => i !== index));
     } else {
       setExpandedRows([index]);
+      const res = await getResourceById(id);
+      setSubCategory(res.subCategories);
     }
   };
 
@@ -61,12 +65,11 @@ function ResourcePage() {
   };
 
   const DeleteResourceById = async (id) => {
-    await deleteResourceById(id).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        dispatch(getResourceCategory());
-      }
-    });
+    const res = await deleteResourceById(id);
+
+    if (res.status === 200) {
+      dispatch(getResourceCategory());
+    }
   };
 
   return (
@@ -123,6 +126,7 @@ function ResourcePage() {
                             >
                               edit
                             </span>
+
                             <span
                               onClick={() => DeleteResourceById(item?._id)}
                               role="button"
@@ -144,7 +148,7 @@ function ResourcePage() {
                             <span
                               className="material-symbols-outlined"
                               role="button"
-                              onClick={() => toggleRow(index)}
+                              onClick={() => toggleRow(item._id, index)}
                             >
                               {expandedRows.includes(index)
                                 ? "chevron_right"
@@ -154,7 +158,7 @@ function ResourcePage() {
                         </tr>
                         <tr>
                           <td colSpan="5">
-                            {item?.subCategories.length > 0 &&
+                            {item?.subCategory?.length > 0 &&
                             expandedRows.includes(index) ? (
                               <table className="table table-dark table-bordered table-hover">
                                 <thead>
@@ -167,45 +171,43 @@ function ResourcePage() {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {item?.subCategories?.map(
-                                    (subCat, subidx) => (
-                                      <tr key={subidx}>
-                                        <th scope="row">#</th>
-                                        <td>{subCat.name}</td>
-                                        <td>{subCat.description}</td>
-                                        <td className="text-truncate">
-                                          <div
-                                            dangerouslySetInnerHTML={{
-                                              __html: subCat.content,
-                                            }}
-                                          ></div>
-                                        </td>
-                                        <td>
-                                          <span
-                                            onClick={() =>
-                                              editCategory(
-                                                subCat?._id,
-                                                subCat?.parentId,
-                                                item?.name
-                                              )
-                                            }
-                                            className="material-symbols-outlined mt-2"
-                                          >
-                                            edit
-                                          </span>
+                                  {subCategory?.map((val, subidx) => (
+                                    <tr key={subidx}>
+                                      <th scope="row">#</th>
+                                      <td>{val.name}</td>
+                                      <td>{val.description}</td>
+                                      <td className="text-truncate">
+                                        <div
+                                          dangerouslySetInnerHTML={{
+                                            __html: val.content,
+                                          }}
+                                        ></div>
+                                      </td>
+                                      <td>
+                                        <span
+                                          onClick={() => {
+                                            editCategory(
+                                              val?._id,
+                                              val?.parentId,
+                                              item?.name
+                                            );
+                                          }}
+                                          className="material-symbols-outlined mt-2"
+                                        >
+                                          edit
+                                        </span>
 
-                                          <span
-                                            onClick={() =>
-                                              DeleteResourceById(subCat._id)
-                                            }
-                                            className="material-symbols-outlined mt-2"
-                                          >
-                                            delete
-                                          </span>
-                                        </td>
-                                      </tr>
-                                    )
-                                  )}
+                                        <span
+                                          onClick={() =>
+                                            DeleteResourceById(val._id)
+                                          }
+                                          className="material-symbols-outlined mt-2"
+                                        >
+                                          delete
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  ))}
                                 </tbody>
                               </table>
                             ) : null}

@@ -89,3 +89,39 @@ export const deleteResourceById = async (id) => {
     console.log(error);
   }
 };
+
+export const createNotificationSetting = async (data) => {
+  const token = await getToken();
+  let FormObj = "";
+  if (data) {
+    FormObj = {
+      title: data.title,
+      icon: "fa fa-Tag",
+      subtitle: data.subtitle,
+      description: data.desc,
+      subcategoryTitle: data.subcategory,
+      subcategory: ["64119b6b0311257717e7055a", "64119b2a0311257717e70559"],
+    };
+  }
+
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_PATH}/admins/setting/createNotificationSetting`,
+    FormObj,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};
+
+export const notificationDropdownValue = async () => {
+  const token = await getToken();
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_PATH}/admins/dropdowns/getDropDown/Notifications`,
+
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};

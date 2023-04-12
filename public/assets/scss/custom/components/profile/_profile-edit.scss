@@ -7,8 +7,8 @@
 .profile-img-edit {
 	position: relative;
 	display: inline-block;
-	height: 150px;
-	width: 150px;
+	height: 130px;
+	width: 130px;
 }
 .file-upload {
 	display: none;
@@ -16,7 +16,7 @@
 .p-image {
 	position: absolute;
 	top: auto;
-	right: 8px;
+	right: 4px;
 	bottom: 10px;
 	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
 	background: var(--#{$variable-prefix}primary);

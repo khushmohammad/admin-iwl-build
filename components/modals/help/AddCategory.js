@@ -83,6 +83,7 @@ const AddCategory = (props) => {
       reset();
       setValue("description", "");
       dispatch(getHelpCategory());
+      if (props.currentid) dispatch(getHelpCategory(props.currentid));
       props.onHide();
     }
   };

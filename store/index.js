@@ -3,7 +3,10 @@ import { persistReducer } from "redux-persist";
 import settingReducer from "./setting/reducers";
 import profileReducer from "./profile";
 import memberReducer from "./member";
+import modeReducer from "./mode/mode";
 import helpReducer from "./help";
+import subscriptionReducer from "./subscription";
+import activityLogReducer from "./activities";
 import icReducer from "./ic";
 import resourceReducer from "./resource";
 import { persistStore } from "redux-persist";
@@ -21,11 +24,14 @@ const persistConfig = {
 
 const reducers = combineReducers({
   setting: settingReducer,
+  mode: modeReducer,
   user: profileReducer,
   member: memberReducer,
   icAction: icReducer,
   help: helpReducer,
   resource: resourceReducer,
+  subscription: subscriptionReducer,
+  activityLog: activityLogReducer,
 });
 
 const rootReducer = (state, action) => {

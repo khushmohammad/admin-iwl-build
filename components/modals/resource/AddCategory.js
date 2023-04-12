@@ -27,6 +27,8 @@ const schema = yup
 const AddCategory = (props) => {
   const dispatch = useDispatch();
 
+  console.log("props", props);
+
   //form validate and config
   const {
     register,
@@ -66,17 +68,26 @@ const AddCategory = (props) => {
     unregister("categoryname");
     let res = null;
 
+    console.log("data", data);
+    console.log("props", props);
+
     if (props.currentid) {
       if (props.parentid === null) {
         unregister("content");
-        res = await updateResource(props.currentid, data);
+        res = await updateResource(props.currentid, {
+          name: data.name,
+          description: data.description,
+        });
       } else {
         res = await updateResource(props.currentid, data);
       }
     } else {
       if (props.parentid === null) {
         unregister("content");
-        res = await createResource(data);
+        res = await createResource({
+          name: data.name,
+          description: data.description,
+        });
       } else {
         register("parentId", { value: props.parentid });
         res = await createResource(data);
@@ -105,7 +116,7 @@ const AddCategory = (props) => {
   };
 
   return (
-    <Modal {...props} style={{ top: "8%" }}>
+    <Modal show={props.show} onHide={props.onHide} style={{ top: "8%" }}>
       <Modal.Header>
         <Modal.Title>
           {props.currentid ? "Update Category" : "Add Category"}

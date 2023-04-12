@@ -246,9 +246,9 @@
     width: 18.75rem;
     position: absolute;
     border: none;
-    top: 100%;
-    right: 0;
-    left: auto;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
     -webkit-animation: fade-in-bottom 0.6s cubic-bezier(0.39, 0.575, 0.565, 1)
       both;
     animation: fade-in-bottom 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;

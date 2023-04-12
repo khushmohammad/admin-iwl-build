@@ -21,6 +21,10 @@ const HelpPage = () => {
 
   const helpCategory = useSelector((state) => state?.help?.category);
 
+  console.log("helpcat::", helpCategory);
+  console.log("subcat::", subCategory);
+  console.log("subpcatchild::", subChildCategory);
+
   const CategoryData = {
     headers: ["#", "Title", "Description", "Action"],
     rows: helpCategory?.helpChildInfo,
@@ -52,6 +56,7 @@ const HelpPage = () => {
   };
 
   const toggleSubRow = async (index, parentId) => {
+    console.log("---index---", index);
     if (expandedSubCatRow.includes(index)) {
       setExpandedSubCatRow(expandedRows.filter((i) => i !== index));
     } else {

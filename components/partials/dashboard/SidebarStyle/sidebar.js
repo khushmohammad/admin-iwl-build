@@ -9,6 +9,14 @@ import { useSelector } from "react-redux";
 import Verticalnav from "./verticalnav";
 import Scrollbar from "smooth-scrollbar";
 const Sidebar = () => {
+  const minisidebar = () => {
+    document.getElementsByTagName("ASIDE")[0].classList.add("sidebar-mini");
+  };
+
+  const miniSideBarClose = () => {
+    document.getElementsByTagName("ASIDE")[0].classList.remove("sidebar-mini");
+  };
+
   const sidebarType = useSelector(SettingSelector.sidebar_type); // array
   const sidebarMenuStyle = useSelector(SettingSelector.sidebar_menu_style);
   useEffect(() => {
@@ -19,7 +27,9 @@ const Sidebar = () => {
       const sidebarResponsive = document.querySelector(
         '[data-sidebar="responsive"]'
       );
-      if (window.innerWidth < 1025) {
+      if (window.innerWidth <= 1380 && window.innerWidth > 1025) {
+        minisidebar();
+      } else if (window.innerWidth < 1025) {
         Array.from(tabs, (elem) => {
           if (
             !elem.classList.contains("flex-column") &&
@@ -36,6 +46,7 @@ const Sidebar = () => {
           }
         }
       } else {
+        miniSideBarClose();
         Array.from(tabs, (elem) => {
           if (elem.classList.contains("on-resize")) {
             elem.classList.remove("flex-column", "on-resize");

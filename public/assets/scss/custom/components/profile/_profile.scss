@@ -523,7 +523,28 @@ ul.request-list {
     }
 	
 }
-
+.profile-img-wrapper {
+	left: 12px;
+	top: 20px;
+    z-index: 111;
+	& .profile-img-edit-wrapper {
+		z-index: 111;
+		bottom: 12px;
+		left: 10px;
+		img {
+			height: auto;
+		}
+	}
+	& .profile-img-bg-edit {
+		min-height: 230px;
+		img {
+			padding: 0px;
+			border-radius: 0%;
+			min-height: 230px;
+			object-fit: cover;
+		}
+	}
+}
 @include media-breakpoint-down(sm) {
     ul.header-nav {
         li {

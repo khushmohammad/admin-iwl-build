@@ -39,7 +39,7 @@
 .content-page {
     overflow: hidden;
     padding:1rem .5rem 0rem .5rem;
-    min-height: 100vh;
+    min-height: 86vh;
 	@if $enable-transitions == true {
 		@include transition-mixin(all 0.3s ease-in-out);
 	}

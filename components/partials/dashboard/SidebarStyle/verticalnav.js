@@ -68,7 +68,7 @@ const VerticalNav = React.memo(() => {
             href="#"
             tabIndex="-1"
           >
-            <span className="default-icon">Social</span>
+            <span className="default-icon">Admin Dashboard</span>
             <span
               className="mini-icon"
               data-bs-toggle="tooltip"
@@ -87,15 +87,12 @@ const VerticalNav = React.memo(() => {
             aria-current="page"
             href="/"
           >
-            <OverlayTrigger
-              placement="right"
-              overlay={<Tooltip>Admin</Tooltip>}
-            >
+            <OverlayTrigger placement="right" overlay={<Tooltip>Home</Tooltip>}>
               <i className="icon material-symbols-outlined">
                 admin_panel_settings
               </i>
             </OverlayTrigger>
-            <span className="item-name">Admin</span>
+            <span className="item-name">Home</span>
           </Link>
         </li>
         <Nav.Item as="li">
@@ -270,7 +267,7 @@ const VerticalNav = React.memo(() => {
                   <span className="item-name">New Category</span>
                 </Link>
               </Nav.Item>
-              {categoryList?.map((item, index) => (
+              {/* {categoryList?.map((item, index) => (
                 <React.Fragment key={index}>
                   <Nav.Item as="li">
                     <Link className="nav-link" aria-current="page" href="">
@@ -301,10 +298,96 @@ const VerticalNav = React.memo(() => {
                     </Link>
                   </Nav.Item>
                 </React.Fragment>
-              ))}
+              ))} */}
             </ul>
           </Accordion.Collapse>
         </Accordion.Item>
+        <Nav.Item as="li">
+          <Link
+            className={`${
+              location.pathname === "/subscription" ? "active" : ""
+            } nav-link `}
+            aria-current="page"
+            href="/subscription"
+          >
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>Subscription</Tooltip>}
+            >
+              <i className="icon material-symbols-outlined">help</i>
+            </OverlayTrigger>
+            <span className="item-name">Subscription</span>
+          </Link>
+        </Nav.Item>
+        <Nav.Item as="li">
+          <Link
+            className={`${
+              location.pathname === "/report" ? "active" : ""
+            } nav-link `}
+            aria-current="page"
+            href="/report"
+          >
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>Reports</Tooltip>}
+            >
+              <i className="icon material-symbols-outlined">flag</i>
+            </OverlayTrigger>
+            <span className="item-name">Reports</span>
+          </Link>
+        </Nav.Item>
+        <Nav.Item as="li">
+          <Link
+            className={`${
+              location.pathname === "/notificationSetting" ? "active" : ""
+            } nav-link `}
+            aria-current="page"
+            href="/notificationSetting"
+          >
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>Notification Setting</Tooltip>}
+            >
+              <i className="icon material-symbols-outlined">notifications</i>
+            </OverlayTrigger>
+            <span className="item-name">Notification Setting</span>
+          </Link>
+        </Nav.Item>
+        <Nav.Item as="li">
+          <Link
+            className={`${
+              location.pathname === "/activitylogs" ? "active" : ""
+            } nav-link `}
+            aria-current="page"
+            href="/activitylogs"
+          >
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>Activity Logs</Tooltip>}
+            >
+              <i className="icon material-symbols-outlined">pace</i>
+            </OverlayTrigger>
+            <span className="item-name">Activity Logs</span>
+          </Link>
+        </Nav.Item>
+
+        <Nav.Item as="li">
+          <Link
+            className={`${
+              location.pathname === "/siteadmin" ? "active" : ""
+            } nav-link `}
+            aria-current="page"
+            href="/siteadmin"
+          >
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>Invitation</Tooltip>}
+            >
+              <i className="icon material-symbols-outlined">person_add</i>
+            </OverlayTrigger>
+            <span className="item-name">Invitation</span>
+          </Link>
+        </Nav.Item>
       </Accordion>
     </React.Fragment>
   );
