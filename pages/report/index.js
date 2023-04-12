@@ -69,57 +69,69 @@ const Report = () => {
         onHidePost={() => setShowPost(false)}
       />
       <Container>
-        {loading ? <SpinnerLoader /> : ""}
         <Card className="inner-page-bg bg-primary p-4 mb-4">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="text-white">Reports</h3>
           </div>
         </Card>
-        <Table hover size="md">
-          <thead className="thead-dark">
-            <tr>
-              <th>#</th>
-              <th>Post</th>
-              <th>Created By</th>
-              <th>Report Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportedFeeds.map((elem, index) => (
-              <tr key={index}>
-                <td>{index + 1 + (currentpage - 1) * limit}</td>
-                <td
-                  role="button"
-                  className="item-name w-25"
-                  variant="link"
-                  onClick={() => {
-                    setShowPost(true);
-                    setPostId(elem._id);
-                  }}
-                >
-                  <Link
-                    href="#"
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
+        {loading ? (
+          <div
+            className="col-sm-12 d-flex justify-content-center align-items-center bg-transparent"
+            style={{ height: "500px" }}
+          >
+            <SpinnerLoader />
+          </div>
+        ) : (
+          <Table hover size="md">
+            <thead className="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Post</th>
+                <th>Created By</th>
+                <th>Report Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportedFeeds.map((elem, index) => (
+                <tr key={index}>
+                  <td>{index + 1 + (currentpage - 1) * limit}</td>
+                  <td
+                    role="button"
+                    className="item-name w-25"
+                    variant="link"
+                    onClick={() => {
+                      setShowPost(true);
+                      setPostId(elem._id);
                     }}
                   >
-                    {elem.description}
-                  </Link>
+                    <Link
+                      href="#"
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {elem.description}
+                    </Link>
 
-                  {/* <span className="material-symbols-outlined">visibility</span> */}
-                </td>
-                <td>
-                  {elem.userInfo.firstName} {elem.userInfo.lastName}
-                </td>
-                <td role="button" onClick={() => postInfo(elem)} variant="link">
-                  <Link href="#">{elem.reportedPosts}</Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                    {/* <span className="material-symbols-outlined">visibility</span> */}
+                  </td>
+                  <td>
+                    {elem.userInfo.firstName} {elem.userInfo.lastName}
+                  </td>
+                  <td
+                    role="button"
+                    onClick={() => postInfo(elem)}
+                    variant="link"
+                  >
+                    <Link href="#">{elem.reportedPosts}</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <div className="d-flex justify-content-center mt-5">
           {reportedFeeds && reportedFeeds.length !== 0 && (

@@ -5,6 +5,7 @@ import Sendinvitation from "../../components/modals/panel/Sendinvitation";
 import { useDispatch, useSelector } from "react-redux";
 import { getListOfRespectiveRoles } from "../../services/user.service";
 import Pagination from "react-js-pagination";
+import { SpinnerLoader } from "../../components/Loader/Loading";
 
 const index = () => {
   const [show, setShow] = useState(false);
@@ -18,6 +19,7 @@ const index = () => {
     headers: ["#", "Email", "Status", "Action"],
   };
   const [limit, setLimit] = useState(10);
+  const [loading, setLoading] = useState(true);
   const [currentpage, setCurrentPage] = useState(1);
   const [pageRange, setPageRange] = useState(0);
   const [totalLength, setTotalLength] = useState(0);
@@ -30,19 +32,21 @@ const index = () => {
       limit
     );
 
-    setList(response.invitedMembers);
-
-    setTotalLength(response.totalMemberCount);
-    const noOfPage = Math.ceil(response.totalMemberCount / limit);
+    setList(response?.invitedMembers);
+    setLoading(false);
+    setTotalLength(response?.totalMemberCount);
+    const noOfPage = Math.ceil(response?.totalMemberCount / limit);
     setPageRange(noOfPage);
   };
 
   useEffect(() => {
+    setLoading(true);
     listOfAllRolesWithStatus();
   }, [currentpage, selectedStatus]);
 
   useEffect(() => {
     setCurrentPage(1);
+    // setLoading(false)
   }, [selectedStatus]);
 
   return (
@@ -69,72 +73,83 @@ const index = () => {
             </Row>
             <Row>
               <Card>
-                <Card.Header className="d-flex justify-content-between">
-                  <div className="header-title d-flex justify-content-between w-100">
-                    <h4 className="card-title">Invite List</h4>
-                    <Form.Group controlId="formFile" className="mb-3">
-                      <Form.Select
-                        aria-label="Default select example"
-                        className="shadow-none"
-                        value={selectedStatus}
-                        onChange={(e) => setSelectedStatus(e.target.value)}
-                      >
-                        <option defaultChecked value="all">
-                          All
-                        </option>
-                        <option value="accepted">Accepted</option>
-                        <option value="pending">Pending</option>
-                      </Form.Select>
-                    </Form.Group>
+                {loading ? (
+                  <div
+                    className="col-sm-12 d-flex justify-content-center align-items-center bg-transparent"
+                    style={{ height: "500px" }}
+                  >
+                    <SpinnerLoader />
                   </div>
-                </Card.Header>
-                <Card.Body>
-                  <div className="table-responsive">
-                    <table className="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          {inviteData.headers.map((header, index) => (
-                            <th key={index}>{header}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {list?.map((listItem, index) => (
-                          <tr>
-                            <th scope="row">
-                              <strong>
-                                {index + 1 + (currentpage - 1) * limit}
-                              </strong>
-                            </th>
-                            <td>{listItem.userName}</td>
-                            <td>{listItem.status}</td>
-                            <td>
-                              <span
-                                role="button"
-                                className="material-symbols-outlined mt-2"
-                              >
-                                forward_media
-                              </span>
+                ) : (
+                  <>
+                    <Card.Header className="d-flex   justify-content-between">
+                      <div className="header-title d-flex justify-content-between w-100">
+                        <h4 className="card-title">Invite List</h4>
+                        <Form.Group controlId="formFile" className="mb-3">
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="shadow-none"
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.target.value)}
+                          >
+                            <option defaultChecked value="all">
+                              All
+                            </option>
+                            <option value="accepted">Accepted</option>
+                            <option value="pending">Pending</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </div>
+                    </Card.Header>
+                    <Card.Body>
+                      <div className="table-responsive">
+                        <table className="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              {inviteData.headers.map((header, index) => (
+                                <th key={index}>{header}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {list?.map((listItem, index) => (
+                              <tr>
+                                <th scope="row">
+                                  <strong>
+                                    {index + 1 + (currentpage - 1) * limit}
+                                  </strong>
+                                </th>
+                                <td>{listItem.userName}</td>
+                                <td>{listItem.status}</td>
+                                <td>
+                                  <span
+                                    role="button"
+                                    className="material-symbols-outlined mt-2"
+                                  >
+                                    forward_media
+                                  </span>
 
-                              <span
-                                role="button"
-                                className="material-symbols-outlined mt-2"
-                              >
-                                delete
-                              </span>
-                            </td>
-                            <td>
-                              <span
-                                className="material-symbols-outlined"
-                                role="button"
-                              ></span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </Card.Body>
+                                  <span
+                                    role="button"
+                                    className="material-symbols-outlined mt-2"
+                                  >
+                                    delete
+                                  </span>
+                                </td>
+                                <td>
+                                  <span
+                                    className="material-symbols-outlined"
+                                    role="button"
+                                  ></span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card.Body>
+                  </>
+                )}
                 <div className="d-flex justify-content-center mt-5">
                   <Pagination
                     activePage={currentpage}
